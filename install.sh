@@ -115,6 +115,10 @@ find_version () {
             patch_version="0.0.10"
             qt_plugin_ver="6"
             ;;
+        "8e33b7955702af920fa4de409b75a5c7b6300a4c")
+            patch_version="0.0.10"
+            qt_plugin_ver="6"
+            ;;
     esac
 }
 
