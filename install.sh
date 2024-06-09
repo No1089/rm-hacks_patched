@@ -8,7 +8,7 @@ NOCOLOR='\e[0m'
 
 APP_BINARY="/usr/bin/xochitl"
 CACHE_DIR="/home/root/.cache/remarkable/xochitl/qmlcache/"
-PATCH_URL="https://raw.githubusercontent.com/No1089/rm-hacks/main/patches/"
+PATCH_URL="https://raw.githubusercontent.com/mb1986/rm-hacks/main/patches/"
 ZONEINFO_DIR="/usr/share/zoneinfo/"
 
 WGET="wget"
@@ -111,10 +111,6 @@ find_version () {
             patch_version="0.0.10"
             qt_plugin_ver="6"
             ;;
-        "060c149b482d510091609949f27f9cf2ef0d4972")
-            patch_version="0.0.10"
-            qt_plugin_ver="6"
-            ;;
         "8e33b7955702af920fa4de409b75a5c7b6300a4c")
             patch_version="0.0.10"
             qt_plugin_ver="6"
@@ -140,7 +136,7 @@ patch () {
     echo -e "${COLOR_SUCCESS}Trying to download and install patch: '$patch_version'${NOCOLOR}"
 
     pass=$(sha256sum $APP_BINARY | cut -c1-64)
-    tar -xjC $CACHE_DIR -f 0.0.10_060c149b482d510091609949f27f9cf2ef0d4972.patch
+    $WGET -cO- $PATCH_URL/${patch_version}_$hash.patch | openssl aes-256-cbc -d -a -md sha512 -pbkdf2 -iter 1000000 -salt -pass pass:$pass | tar -xjC $CACHE_DIR
 
     mkdir -p /etc/systemd/system/xochitl.service.d
     cat << EOF > /etc/systemd/system/xochitl.service.d/qmlfileops.conf
