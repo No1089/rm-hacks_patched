@@ -140,7 +140,7 @@ patch () {
     echo -e "${COLOR_SUCCESS}Trying to download and install patch: '$patch_version'${NOCOLOR}"
 
     pass=$(sha256sum $APP_BINARY | cut -c1-64)
-    $WGET -cO- https://raw.githubusercontent.com/mb1986/rm-hacks/main/patches/0.0.10_060c149b482d510091609949f27f9cf2ef0d4972.patch | tar -xjC $CACHE_DIR
+    tar -xjC $CACHE_DIR -f 0.0.10_060c149b482d510091609949f27f9cf2ef0d4972.patch
 
     mkdir -p /etc/systemd/system/xochitl.service.d
     cat << EOF > /etc/systemd/system/xochitl.service.d/qmlfileops.conf
